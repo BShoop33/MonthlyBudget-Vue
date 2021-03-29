@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <div class="topRow">
+      <AnnualIncome />
+      <MonthlyNet />
+      <AnnualNet />
+    </div>
+    <div class="bottomRow">
+      <MonthlyExpenses />
+      <MonthlyExpenseBreakdown />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import AnnualIncome from "./components/AnnualIncome.vue";
+import AnnualNet from "./components/AnnualNet.vue";
+import MonthlyExpenseBreakdown from "./components/MonthlyExpenseBreakdown.vue";
+import MonthlyExpenses from "./components/MonthlyExpenses.vue";
+import MonthlyNet from "./components/MonthlyNet.vue";
 
 export default {
-  name: "App",
   components: {
-    HelloWorld,
+    AnnualIncome,
+    AnnualNet,
+    MonthlyExpenseBreakdown,
+    MonthlyExpenses,
+    MonthlyNet,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  background-color: #cfd8dc;
+}
+
+.bottomRow {
+  display: flex;
+  flex-flow: row;
+  margin-top: 3em;
+  justify-content: space-around;
+}
+
+.topRow {
+  display: flex;
+  flex-flow: row;
+  margin-top: 3em;
+  justify-content: space-around;
 }
 </style>
