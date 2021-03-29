@@ -9,9 +9,8 @@
       <div class="annualIncomeInputPrefix">$</div>
       <input
         class="annualIncomeInput"
+        v-model="form.annualIncome"
         type="number"
-        @submit.prevent="handleSubmit"
-        ref="firstName"
       />
     </v-form>
   </div>
@@ -22,15 +21,13 @@ export default {
   data() {
     return {
       form: {
-        firstName: "",
+        annualIncome: "",
       },
     };
   },
   methods: {
     handleSubmit() {
-      console.log("go");
-
-      this.$refs.firstNameInput.value = "";
+      sessionStorage.setItem("annualIncome", this.form.annualIncome);
     },
   },
 };

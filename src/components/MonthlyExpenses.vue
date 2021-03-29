@@ -88,7 +88,7 @@ export default {};
 
 .monthlyExpensesContainer {
   width: 55em;
-  height: 30em;
+  height: 40em;
   background-color: white;
   border: 3px;
   border-color: purple;
@@ -101,12 +101,9 @@ export default {};
 
 .monthlyExpensesLabel {
   font-size: 20pt;
-  /* margin-bottom: 1em;
-  margin-left: 5.5em; */
   color: green;
   font-weight: 800;
   margin-right: 22em;
-  /* margin-bottom: 8em; */
 }
 
 .monthlyExpesesHeaderContainer {
@@ -115,9 +112,6 @@ export default {};
 }
 
 .monthlyExpensesHeaderName {
-  /* border-bottom: 2px;
-  border-bottom-color: black;
-  border-bottom-style: solid; */
   width: 17.25em;
   font-weight: 600;
   font-size: 14pt;
@@ -126,24 +120,23 @@ export default {};
 
 .monthlyExpensesHeaderAmount {
   margin-right: 20.5em;
-  /* border-bottom: 2px;
-  border-bottom-color: black;
-  border-bottom-style: solid; */
   font-weight: 600;
   font-size: 14pt;
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .monthlyExpensesEntries {
   margin-right: 28em;
   overflow: auto;
   width: 20em;
+  margin-top: 1em;
 }
 
 .monthlyExpensesEntriesContainer {
   display: flex;
   flex-flow: row;
-  height: 16em;
+  height: 25em;
   overflow: auto;
 }
 
