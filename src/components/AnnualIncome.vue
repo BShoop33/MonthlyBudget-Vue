@@ -1,15 +1,39 @@
 <template>
   <div class="annualIncomeContainer">
     <div class="annualIncomeLabel">Annual Income</div>
-    <div class="annualIncomeInputContainer">
+    <v-form
+      class="annualIncomeInputContainer"
+      @submit.prevent="handleSubmit"
+      ref="contactForm"
+    >
       <div class="annualIncomeInputPrefix">$</div>
-      <input class="annualIncomeInput" type="number" />
-    </div>
+      <input
+        class="annualIncomeInput"
+        type="number"
+        @submit.prevent="handleSubmit"
+        ref="firstName"
+      />
+    </v-form>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      form: {
+        firstName: "",
+      },
+    };
+  },
+  methods: {
+    handleSubmit() {
+      console.log("go");
+
+      this.$refs.firstNameInput.value = "";
+    },
+  },
+};
 </script>
 
 <style scoped>
