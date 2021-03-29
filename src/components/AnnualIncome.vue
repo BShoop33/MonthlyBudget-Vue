@@ -1,15 +1,36 @@
 <template>
   <div class="annualIncomeContainer">
     <div class="annualIncomeLabel">Annual Income</div>
-    <div class="annualIncomeInputContainer">
+    <v-form
+      class="annualIncomeInputContainer"
+      @submit.prevent="handleSubmit"
+      ref="contactForm"
+    >
       <div class="annualIncomeInputPrefix">$</div>
-      <input class="annualIncomeInput" type="number" />
-    </div>
+      <input
+        class="annualIncomeInput"
+        v-model="form.annualIncome"
+        type="number"
+      />
+    </v-form>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      form: {
+        annualIncome: "",
+      },
+    };
+  },
+  methods: {
+    handleSubmit() {
+      sessionStorage.setItem("annualIncome", this.form.annualIncome);
+    },
+  },
+};
 </script>
 
 <style scoped>

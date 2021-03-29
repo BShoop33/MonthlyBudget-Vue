@@ -2,8 +2,8 @@
   <div>
     <div class="topRow">
       <AnnualIncome />
-      <MonthlyNet />
       <AnnualNet />
+      <MonthlyNet />
     </div>
     <div class="bottomRow">
       <MonthlyExpenses />
@@ -15,37 +15,33 @@
 <script>
 import AnnualIncome from "./components/AnnualIncome.vue";
 import AnnualNet from "./components/AnnualNet.vue";
-import MonthlyExpenseBreakdown from "./components/MonthlyExpenseBreakdown.vue";
-import MonthlyExpenses from "./components/MonthlyExpenses.vue";
 import MonthlyNet from "./components/MonthlyNet.vue";
+import MonthlyExpenses from "./components/MonthlyExpenses.vue";
+import MonthlyExpenseBreakdown from "./components/MonthlyExpenseBreakdown.vue";
 
 export default {
   components: {
     AnnualIncome,
     AnnualNet,
-    MonthlyExpenseBreakdown,
-    MonthlyExpenses,
     MonthlyNet,
+    MonthlyExpenses,
+    MonthlyExpenseBreakdown,
   },
 };
 </script>
 
 <style>
-body {
-  background-color: #cfd8dc;
+.topRow {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  margin-top: 2em;
 }
 
 .bottomRow {
   display: flex;
   flex-flow: row;
-  margin-top: 3em;
   justify-content: space-around;
-}
-
-.topRow {
-  display: flex;
-  flex-flow: row;
-  margin-top: 3em;
-  justify-content: space-around;
+  margin-top: 2em;
 }
 </style>

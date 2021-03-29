@@ -11,9 +11,8 @@ export default {};
 <style>
 .monthlyExpenseBreakdownContainer {
   width: 55em;
-  height: 30em;
+  height: 40em;
   background-color: white;
-
   border: 3px;
   border-color: purple;
   border-style: solid;
@@ -28,6 +27,6 @@ export default {};
   color: green;
   font-weight: 800;
   margin-right: 18em;
-  margin-bottom: 15em;
+  margin-bottom: 20em;
 }
 </style>
