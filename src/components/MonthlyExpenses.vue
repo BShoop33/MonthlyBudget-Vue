@@ -1,33 +1,141 @@
 <template>
-  <div class="monthlyExpensesContainer">
-    <div class="monthlyExpensesLabel">Monthly Expenses</div>
-    <div class="monthlyExpesesHeaderContainer">
-      <div class="monthlyExpensesHeaderName">Name</div>
-      <div class="monthlyExpensesHeaderAmount">Amount</div>
-    </div>
-    <hr style="width: 93%; text-align: left; margin-left: 1" />
-    <div class="monthlyExpensesEntriesContainer">
-      <div class="monthlyExpensesEntries">
-        Entries' Name and Amount PlaceHolder
+  <v-card>
+    <div class="monthlyExpensesContainer">
+      <div class="monthlyExpensesLabel">Monthly Expenses</div>
+      <div class="monthlyExpesesHeaderContainer">
+        <div class="monthlyExpensesHeaderName">Name</div>
+        <div class="monthlyExpensesHeaderAmount">Amount</div>
       </div>
-    </div>
-    <hr style="width: 93%; text-align: left; margin-left: 1" />
-    <div class="addExpenseLabel">Add Expense</div>
-    <div class="addExpenseInputContainer">
-      <input class="monthlyIncomeNameInput" type="text" />
+      <hr style="width: 93%; text-align: left; margin-left: 1" />
+      <div class="monthlyExpensesEntriesContainer">
+        <v-card-text>
+          <v-simple-table>
+            <template v-slot:default>
+              <tbody class="table">
+                <tr v-for="input in inputs" :key="input.monthlyIncomeNameInput">
+                  <td class="monthlyIncomeNameEntry">
+                    {{ input.name }}
+                  </td>
+                  <td class="monthlyIncomeAmountEntry">
+                    {{ input.amount }}
+                  </td>
+                  <td class="text-right">
+                    <v-btn fab x-small dark @click="handleRemove(input)">
+                      <v-icon class="deleteIcon">mdi-minus</v-icon>
+                    </v-btn>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-card-text>
+      </div>
+      <hr style="width: 93%; text-align: left; margin-left: 1" />
+      <v-form
+        class="MonthlyExpensesInputContainer"
+        @submit.prevent="handleSubmit"
+      >
+        <div class="addExpenseLabel">Add Expense</div>
+        <div class="addExpenseInputContainer">
+          <input
+            class="monthlyIncomeNameInput"
+            v-model="form.monthlyIncomeNameInput"
+            type="text"
+            ref="monthlyIncomeNameInput"
+          />
 
-      <div class="monthlyExpenseInputPrefix">$</div>
-      <input class="monthlyIncomeInput" type="number" />
-      <button class="monthlyIncomeSubmit">+</button>
+          <div class="monthlyExpenseInputPrefix">$</div>
+          <input
+            class="monthlyIncomeInput"
+            v-model="form.monthlyIncomeAmountInput"
+            type="number"
+            ref="monthlyIncomeAmountInput"
+          />
+          <button class="monthlyIncomeSubmit" type="submit">+</button>
+        </div>
+      </v-form>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["inputs"],
+  data() {
+    return {
+      form: {
+        monthlyIncomeNameInput: "",
+        monthlyIncomeAmountInput: "",
+      },
+    };
+  },
+
+  methods: {
+    handleSubmit() {
+      this.$emit("input-submit", {
+        name: this.form.monthlyIncomeNameInput,
+        amount: +this.form.monthlyIncomeAmountInput,
+      });
+      // this.$emit("input-submit", this.form);
+      this.$refs.monthlyIncomeNameInput.value = "";
+      this.$refs.monthlyIncomeAmountInput.value = null;
+    },
+    handleRemove(expense) {
+      this.$emit("expense-removed", expense);
+    },
+  },
+};
 </script>
 
 <style>
+.deleteButton {
+  background-color: red;
+  border-radius: 50px;
+  outline: none;
+}
+
+.monthlyIncomeNameEntry {
+  width: 23em;
+}
+.monthlyIncomeAmountEntry {
+  width: 30em;
+}
+
+.monthlyExpensesContainer {
+  width: 55em;
+  height: 40em;
+  background-color: white;
+  border: 3px;
+  border-color: purple;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+
+.monthlyExpensesLabel {
+  font-size: 20pt;
+  color: green;
+  font-weight: 800;
+  margin-right: 22em;
+}
+
+.table {
+  width: 40em;
+}
+
+.entries {
+  display: flex;
+  flex-flow: row;
+  margin-bottom: 1em;
+  font-size: 14pt;
+}
+
+.monthlyIncomeAmount {
+  margin-left: 16em;
+}
+
 .monthlyIncomeNameInput {
   font-size: 18pt;
   margin-right: 1em;
@@ -86,26 +194,6 @@ export default {};
   flex-flow: row;
 }
 
-.monthlyExpensesContainer {
-  width: 55em;
-  height: 40em;
-  background-color: white;
-  border: 3px;
-  border-color: purple;
-  border-style: solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-}
-
-.monthlyExpensesLabel {
-  font-size: 20pt;
-  color: green;
-  font-weight: 800;
-  margin-right: 22em;
-}
-
 .monthlyExpesesHeaderContainer {
   display: flex;
   flex-flow: row;
@@ -127,10 +215,13 @@ export default {};
 }
 
 .monthlyExpensesEntries {
-  margin-right: 28em;
   overflow: auto;
-  width: 20em;
+  width: 42em;
   margin-top: 1em;
+  /* display: flex;
+  flex-flow: row;
+  margin-bottom: 1em;
+  font-size: 14pt; */
 }
 
 .monthlyExpensesEntriesContainer {

@@ -6,7 +6,11 @@
       <MonthlyNet />
     </div>
     <div class="bottomRow">
-      <MonthlyExpenses />
+      <MonthlyExpenses
+        @input-submit="submitNewExpense"
+        :inputs="inputs"
+        @expense-removed="handleExpenseRemoved"
+      />
       <MonthlyExpenseBreakdown />
     </div>
   </div>
@@ -26,6 +30,28 @@ export default {
     MonthlyNet,
     MonthlyExpenses,
     MonthlyExpenseBreakdown,
+  },
+  data() {
+    return {
+      inputs: [],
+    };
+  },
+  mounted() {
+    const existingInputs = JSON.parse(localStorage.getItem("expenseEntry"));
+    this.inputs = existingInputs || [];
+  },
+  methods: {
+    submitNewExpense(newEntry) {
+      this.inputs.push(newEntry);
+      console.log(this.inputs);
+      localStorage.setItem("expenseEntry", JSON.stringify(this.inputs));
+    },
+    handleExpenseRemoved(expenseToRemove) {
+      this.inputs = this.inputs.filter((e) => {
+        return e !== expenseToRemove;
+      });
+      localStorage.setItem("monthlyExpenses", JSON.stringify(this.inputs));
+    },
   },
 };
 </script>
