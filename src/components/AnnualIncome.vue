@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      sessionStorage.setItem("annualIncome", this.form.annualIncome);
+      localStorage.setItem("annualIncome", this.form.annualIncome);
     },
   },
 };
@@ -64,7 +64,6 @@ export default {
   border-top-style: solid;
   padding-left: 0.25em;
   padding-right: 0.25em;
-  margin-left: 1em;
 }
 
 .annualIncomeInput {
