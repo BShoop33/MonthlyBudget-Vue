@@ -1,12 +1,14 @@
 <template>
   <div class="annualNetContainer">
     <div class="annualNetLabel">Annual Net</div>
-    <div class="annualNetAmount">$Placeholder</div>
+    <div class="annualNetAmount">${{ annualNet }}</div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["annualNet"],
+};
 </script>
 
 <style>

@@ -1,9 +1,14 @@
 <template>
   <div>
     <div class="topRow">
-      <AnnualIncome @annualExpenseSubmitted="showIncome" />
-      <AnnualNet />
-      <MonthlyNet :monthlyNet="monthlyNet" />
+      <AnnualIncome
+        @annualExpenseSubmitted="
+          showIncome();
+          showAnnualNet();
+        "
+      />
+      <AnnualNet :annualNet="formattedAnnualNet" />
+      <MonthlyNet :monthlyNet="formattedMonthlyNet" />
     </div>
     <div class="bottomRow">
       <MonthlyExpenses
@@ -36,6 +41,8 @@ export default {
       inputs: [],
       monthlyNet: 0,
       annualIncome: 0,
+      formattedMonthlyNet: 0,
+      formattedAnnualNet: 0,
     };
   },
   mounted() {
@@ -55,8 +62,13 @@ export default {
     },
     showIncome() {
       this.annualIncome = JSON.parse(localStorage.getItem("annualIncome"));
-      this.monthlyNet = this.annualIncome - this.totalMonthlyExpenses;
-      // this.form.annualIncome - this.totalMonthlyExpenses;
+      this.monthlyNet = (this.annualIncome - this.totalMonthlyExpenses) / 12;
+      this.formattedMonthlyNet = this.monthlyNet.toFixed(2);
+    },
+    showAnnualNet() {
+      this.annualIncome = JSON.parse(localStorage.getItem("annualIncome"));
+      this.annualNet = this.annualIncome - this.totalMonthlyExpenses;
+      this.formattedAnnualNet = this.annualNet.toFixed(2);
     },
   },
   computed: {
