@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="topRow">
-      <AnnualIncome />
+      <AnnualIncome @annualExpenseSubmitted="showIncome" />
       <AnnualNet />
-      <MonthlyNet />
+      <MonthlyNet :monthlyNet="monthlyNet" />
     </div>
     <div class="bottomRow">
       <MonthlyExpenses
@@ -34,17 +34,18 @@ export default {
   data() {
     return {
       inputs: [],
+      monthlyNet: 0,
+      annualIncome: 0,
     };
   },
   mounted() {
-    const existingInputs = JSON.parse(localStorage.getItem("expenseEntry"));
+    const existingInputs = JSON.parse(localStorage.getItem("monthlyExpenses"));
     this.inputs = existingInputs || [];
   },
   methods: {
     submitNewExpense(newEntry) {
       this.inputs.push(newEntry);
-      console.log(this.inputs);
-      localStorage.setItem("expenseEntry", JSON.stringify(this.inputs));
+      localStorage.setItem("monthlyExpenses", JSON.stringify(this.inputs));
     },
     handleExpenseRemoved(expenseToRemove) {
       this.inputs = this.inputs.filter((e) => {
@@ -52,6 +53,30 @@ export default {
       });
       localStorage.setItem("monthlyExpenses", JSON.stringify(this.inputs));
     },
+    showIncome() {
+      this.annualIncome = JSON.parse(localStorage.getItem("annualIncome"));
+      this.monthlyNet = this.annualIncome - this.totalMonthlyExpenses;
+      // this.form.annualIncome - this.totalMonthlyExpenses;
+    },
+  },
+  computed: {
+    //   monthlyIncome() {
+    //     return this.annualIncome / 12;
+    //   },
+    totalMonthlyExpenses() {
+      return this.inputs.reduce((total, month) => {
+        return total + month.amount;
+      }, 0);
+    },
+    //   annualExpenses() {
+    //     return this.totalMonthlyExpenses * 12;
+    //   },
+    //   monthlyNet() {
+    //     return (this.monthlyIncome - this.totalMonthlyExpenses).toFixed(2);
+    //   },
+    //   annualNet() {
+    //     return +(this.annualIncome - this.annualExpenses).toFixed(2);
+    //   },
   },
 };
 </script>

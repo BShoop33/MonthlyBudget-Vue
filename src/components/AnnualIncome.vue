@@ -21,13 +21,14 @@ export default {
   data() {
     return {
       form: {
-        annualIncome: "",
+        annualIncome: 0,
       },
     };
   },
   methods: {
     handleSubmit() {
       localStorage.setItem("annualIncome", this.form.annualIncome);
+      this.$emit("annualExpenseSubmitted", this.form.annualIncome);
     },
   },
 };
