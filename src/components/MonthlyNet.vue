@@ -1,19 +1,13 @@
 <template>
   <div class="monthlyNetContainer">
     <div class="monthlyNetLabel">Monthly Net</div>
-    <div class="monthlyNetAmount">{{ monthlyNet }}</div>
+    <div class="monthlyNetAmount">${{ monthlyNet }}</div>
   </div>
 </template>
 
 <script>
 export default {
   props: ["monthlyNet"],
-  // methods: {
-  // showIncome() {
-  //   const annualIncome = JSON.parse(localStorage.getItem("annualIncome"));
-  //   this.income = annualIncome || [];
-  // },
-  // },
 };
 </script>
 

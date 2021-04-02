@@ -36,7 +36,9 @@
         @submit.prevent="handleSubmit"
       >
         <div class="addExpenseLabel">Add Expense</div>
+
         <div class="addExpenseInputContainer">
+          <div class="monthlyExpenseInputPrefix"></div>
           <input
             class="monthlyIncomeNameInput"
             v-model="form.monthlyIncomeNameInput"
@@ -65,7 +67,7 @@ export default {
     return {
       form: {
         monthlyIncomeNameInput: "",
-        monthlyIncomeAmountInput: "",
+        monthlyIncomeAmountInput: 0,
       },
     };
   },
@@ -144,6 +146,7 @@ export default {
   border-color: black;
   border-style: solid;
   outline: none;
+  border-left: none;
 }
 
 .monthlyExpenseInputPrefix {
@@ -158,7 +161,6 @@ export default {
   border-top-style: solid;
   padding-left: 0.25em;
   padding-right: 0.25em;
-  padding-top: 0.2em;
   margin-left: 1em;
   font-size: 18pt;
 }
